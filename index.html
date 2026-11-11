@@ -1,0 +1,30 @@
+node_modules
+dist
+.env
+<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101a2e"><title>PG Tareffa</title></head><body><div id="app"></div><script type="module" src="/src/main.js"></script></body></html>
+{"name":"pg-tareffa-iron","version":"2.0.0","private":true,"type":"module","scripts":{"dev":"vite --host 0.0.0.0","build":"vite build","preview":"vite preview"},"dependencies":{"@supabase/supabase-js":"^2.57.0"},"devDependencies":{"vite":"^7.1.7"}}
+# PG Tareffa + Iron v2
+
+## Publicar em um repositório novo
+1. Crie um repositório GitHub vazio (ex.: `PG-Tareffa-Iron-v2`).
+2. Extraia este ZIP e envie todo o conteúdo para a raiz do repositório.
+3. Em Settings → Secrets and variables → Actions, crie `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`.
+4. Em Settings → Pages, escolha **GitHub Actions** como fonte.
+5. Abra Actions e aguarde `Deploy PG Tareffa` concluir.
+
+## Supabase
+1. No Supabase, abra SQL Editor e execute `supabase/schema.sql`.
+2. Em Project Settings → API, use Project URL e Publishable/anon key.
+3. Crie seu usuário em Authentication → Users.
+4. A função Edge `iron` deve estar publicada no mesmo projeto, validar JWT e aceitar `{message,history,context}`, retornando `{answer}` ou `{response}`.
+5. A chave Gemini/OpenAI fica somente nos Secrets da Edge Function; nunca no frontend.
+
+A interface limita o login a `pedrogui.mambo@gmail.com`. Para trocar, altere `ALLOWED_EMAIL` em `src/main.js`.
+
+## Funcionalidades
+Home com temperatura de São Paulo (Open-Meteo), pesquisa Google, relógio, alarmes locais, Dashboard, calculadora, calendário, Iron, CRM, tarefas, metas, rotinas, configurações de tema/sincronização, backup JSON e lousa de criatividade.
+
+Notas: alarmes só tocam enquanto o site está aberto. Pesquisa Google abre resultados numa nova aba. CRM e lousa ficam neste navegador; os demais dados ficam no Supabase com RLS.
+import { defineConfig } from "vite"; export default defineConfig({base:process.env.VITE_BASE||"./"});
+VITE_SUPABASE_URL=https://SEU-PROJETO.supabase.co
+VITE_SUPABASE_ANON_KEY=COLE_SUA_CHAVE_PUBLISHABLE_OU_ANON
